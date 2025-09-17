@@ -2,16 +2,17 @@ import './App.css';
 import StandardLayout from './Layouts/StandardLayout';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import Formalization from './pages/Formalization';
-import Home from './pages/Home';
-import AdminPanelBusiness from './pages/AdminPanelBusiness';
-import AdminPanelTownHall from './pages/AdminPanelTownHall';
-import AdminPanelUser from './pages/AdminPanelUser';
-import Call from './pages/Call';
+import Formalization from './Pages/Formalization';
+import Home from './Pages/Home';
+import AdminPanelBusiness from './Pages/AdminPanelBusiness';
+import AdminPanelTownHall from './Pages/AdminPanelTownHall';
+import AdminPanelUser from './Pages/AdminPanelUser';
+import Call from './Pages/Call';
 import Login from './SignIn/Login';
 import Register from './SignIn/Register';
-import Profile from './pages/Profile';
-import NotFound from './pages/NotFound';
+import Profile from './Pages/Profile';
+import NotFound from './Pages/NotFound';
+import Marketplace from './Pages/Marketplace';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,8 @@ const router = createBrowserRouter([
       { path: "/call", element: <Call></Call> },
       { path: "/login", element: <Login></Login> },
       { path: "/register", element: <Register></Register> },
-      { path: "/profile", element: <Profile></Profile> }
+      { path: "/profile", element: <Profile></Profile> },
+      {path: "/marketplace", element: <Marketplace></Marketplace>}
     ],
   },
   { path: "/*", element: <NotFound></NotFound> }
