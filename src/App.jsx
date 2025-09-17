@@ -2,8 +2,8 @@ import './App.css';
 import StandardLayout from './Layouts/StandardLayout';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import Formalization from './Pages/Formalization';
 import Home from './Pages/Home';
+import Formalization from './Pages/Formalization';
 import AdminPanelBusiness from './Pages/AdminPanelBusiness';
 import AdminPanelTownHall from './Pages/AdminPanelTownHall';
 import AdminPanelUser from './Pages/AdminPanelUser';
