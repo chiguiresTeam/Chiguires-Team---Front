@@ -19,7 +19,7 @@ export type Requirement = {
   category: "Base legal" | "Local y seguridad" | "Sectorial" | "Operación continua";
   always?: boolean;
   optional?: boolean;
-  conditions?: Partial<Flags> & {
+    conditions?: Partial<Omit<Flags, 'expectedAforo'>> & {
     expectedAforo?: number | { gt?: number; gte?: number; lt?: number; lte?: number };
   };
   links?: { label: string; url: string }[];
