@@ -9,9 +9,11 @@ import AdminPanelTownHall from './Pages/AdminPanelTownHall';
 import AdminPanelUser from './Pages/AdminPanelUser';
 import Call from './Pages/Call';
 import Register from './SignIn/Register';
-import Profile from './Pages/Profile';
+import Profile from './Pages/ProfileUser';
 import NotFound from './Pages/NotFound';
 import Marketplace from './Pages/Marketplace';
+import ProfileBussiness from './Pages/ProfileBusiness';
+import ProfileUser from './Pages/ProfileUser';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +26,8 @@ const router = createBrowserRouter([
       { path: "/admin-user", element: <AdminPanelUser></AdminPanelUser> },
       { path: "/call", element: <Call></Call> },
       { path: "/register", element: <Register></Register> },
-      { path: "/profile", element: <Profile></Profile> },
+      { path: "/profile", element: <ProfileUser></ProfileUser> },
+      { path: "/profile-business", element: <ProfileBussiness></ProfileBussiness> },
       {path: "/marketplace", element: <Marketplace></Marketplace>}
     ],
   },

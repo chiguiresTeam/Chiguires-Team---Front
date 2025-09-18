@@ -1,6 +1,4 @@
-import {useState} from "react";
-import Login from "../SignIn/Login";
-import Register from "../SignIn/Register";
+import { NavLink } from "react-router-dom";
 export default function Home() {
   const btnPrimary =
     "inline-block bg-green-700 text-white font-bold py-3 px-6 rounded-full hover:bg-green-800 transition duration-300 ease-in-out transform hover:scale-105 shadow-lg";
@@ -99,7 +97,9 @@ export default function Home() {
                 <span className="text-gray-700">Negocio informal. ¡Te ayudamos a empezar el camino!</span>
               </div>
             </div>
-            <a href="#formalizacion" className={`${btnPrimary} mt-8`}>Quiero formalizarme</a>
+            {/* <a href="/formalization" className={`${btnPrimary} mt-8`}>Quiero formalizarme</a> */}
+            <NavLink to="/formalization" onClick={() => window.scrollTo(0, 0)} className={`${btnPrimary} mt-4`}>Ver formalizaciones</NavLink>
+        
           </div>
 
           <div className="bg-white p-8 rounded-2xl shadow-xl">

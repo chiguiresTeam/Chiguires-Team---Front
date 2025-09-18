@@ -2,9 +2,6 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 export default function Navbar({onLoginClick, onRegisterClick}) {
 
-
-  const [showLogin, setShowLogin] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
   return (
     <header className="bg-white/75 backdrop-blur-lg shadow-md w-full fixed top-0 z-50">
       <nav className="container mx-auto px-6 py-3 flex justify-between items-center">
@@ -21,6 +18,8 @@ export default function Navbar({onLoginClick, onRegisterClick}) {
           <NavLink to="/marketplace" className="text-gray-700 hover:text-orange-500 font-medium">Marketplace</NavLink>
           <NavLink to="/formalization" className="text-gray-700 hover:text-orange-500 font-medium">Formalízate</NavLink>
           <NavLink to="/call" className="text-gray-700 hover:text-orange-500 font-medium">Convocatorias</NavLink>
+          <NavLink to="/profile" className="text-gray-700 hover:text-orange-500 font-medium">Perfil</NavLink>
+          <NavLink to="/profile-business" className="text-gray-700 hover:text-orange-500 font-medium">Perfil Empresa</NavLink>
 
         </div>
 
