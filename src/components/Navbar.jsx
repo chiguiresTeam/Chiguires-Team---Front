@@ -6,11 +6,11 @@ export default function Navbar({onLoginClick, onRegisterClick}) {
     <header className="bg-white/75 backdrop-blur-lg shadow-md w-full fixed top-0 z-50">
       <nav className="container mx-auto px-6 py-3 flex justify-between items-center">
 
-        <a href="#" className="flex items-center space-x-2">
+        <NavLink to="/" className="flex items-center space-x-2">
           <span className="text-2xl font-bold text-green-800">
             Vibra<span className="text-orange-500">Llano</span>
           </span>
-        </a>
+        </NavLink>
 
 
         <div className="hidden md:flex items-center space-x-8">
