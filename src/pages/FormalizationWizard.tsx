@@ -271,7 +271,7 @@ export default function FormalizationWizard() {
                     </select>
                   </FormField>
                 </div>
-                 <FormField label="Código CIIU (Opcional, ayuda a autocompletar)">
+                 <FormField label="Código CIIU">
                     <select value={ciiu} onChange={e => setCiiu(e.target.value)} className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-400">
                       <option value="">— Seleccionar para autocompletar —</option>
                       {CIIU_PRESETS.map(p => <option key={p.code} value={p.code}>{p.code} — {p.name}</option>)}
