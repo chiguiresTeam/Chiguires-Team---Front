@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
+export default function Navbar({onLoginClick, onRegisterClick}) {
 
-export default function Navbar() {
+
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
   return (
     <header className="bg-white/75 backdrop-blur-lg shadow-md w-full fixed top-0 z-50">
       <nav className="container mx-auto px-6 py-3 flex justify-between items-center">
@@ -12,19 +16,31 @@ export default function Navbar() {
         </a>
 
 
-        <div className="hidden lg:flex items-center space-x-8">
-            <NavLink to="/" className="text-gray-700 hover:text-orange-500 font-medium">Inicio</NavLink>
-            <NavLink to="/marketplace" className="text-gray-700 hover:text-orange-500 font-medium">Marketplace</NavLink>
-            <NavLink to="/formalization" className="text-gray-700 hover:text-orange-500 font-medium">Formalízate</NavLink>
-            <NavLink to="/call" className="text-gray-700 hover:text-orange-500 font-medium">Convocatorias</NavLink>
+        <div className="hidden md:flex items-center space-x-8">
+          <NavLink to="/" className="text-gray-700 hover:text-orange-500 font-medium">Inicio</NavLink>
+          <NavLink to="/marketplace" className="text-gray-700 hover:text-orange-500 font-medium">Marketplace</NavLink>
+          <NavLink to="/formalization" className="text-gray-700 hover:text-orange-500 font-medium">Formalízate</NavLink>
+          <NavLink to="/call" className="text-gray-700 hover:text-orange-500 font-medium">Convocatorias</NavLink>
 
         </div>
 
 
         <div className="hidden lg:flex items-center space-x-4">
-          <button className="text-green-800 font-semibold hover:text-orange-500 transition">Iniciar Sesión</button>
-          <button className="bg-orange-500 text-white font-bold py-2 px-5 rounded-full hover:bg-orange-600 transition duration-300 shadow">Registrarse</button>
+
+          <button
+          type="button"
+          onClick={onLoginClick}
+           className="text-green-800 font-semibold hover:text-orange-500 transition" >
+            Iniciar Sesión
+           </button>
+
+        <button 
+        type="button"
+        onClick={onRegisterClick}
+        className="bg-orange-500 text-white font-bold py-2 px-5 rounded-full hover:bg-orange-600 transition duration-300 shadow"
+        >Registrate</button>
         </div>
+
 
 
         <div className="lg:hidden">

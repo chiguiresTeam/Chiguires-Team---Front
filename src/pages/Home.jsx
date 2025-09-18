@@ -1,4 +1,6 @@
-
+import {useState} from "react";
+import Login from "../SignIn/Login";
+import Register from "../SignIn/Register";
 export default function Home() {
   const btnPrimary =
     "inline-block bg-green-700 text-white font-bold py-3 px-6 rounded-full hover:bg-green-800 transition duration-300 ease-in-out transform hover:scale-105 shadow-lg";
@@ -22,8 +24,8 @@ export default function Home() {
               placeholder="Busca productos, servicios o negocios..."
               className="w-full py-4 px-6 rounded-full text-gray-800 shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-300"
             />
-            <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-green-700 p-3 rounded-full hover:bg-green-800 transition">
-              {/* <Search className="w-5 h-5 text-white" /> */}
+            <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-green-200/75 p-3 rounded-full hover:bg-green-300/75 transition">
+              <img src="https://img.icons8.com/?size=50&id=132&format=png" className="w-5 h-5 text-white" />
             </button>
           </div>
         </div>
@@ -75,10 +77,10 @@ export default function Home() {
           <div>
             <span className="text-orange-500 font-semibold">CONFIANZA Y CRECIMIENTO</span>
             <h2 className="text-4xl font-bold text-green-800 mt-2 mb-4">
-              Tu Nivel de Formalización a la Vista de Todos
+              Te ayudamos A Formalizar
             </h2>
             <p className="text-gray-600 mb-6">
-              Implementamos un sistema de colores intuitivo que muestra el estado de formalización de cada negocio. Esto genera confianza en los compradores y te abre las puertas a nuevas oportunidades.
+              Implementamos un sistema que te mostrara el nivel de formalizacion de tu negocio, te ayudamos a estar al 100.
             </p>
             <div className="space-y-4">
               <div className="flex items-center">
