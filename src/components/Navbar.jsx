@@ -20,6 +20,7 @@ export default function Navbar({onLoginClick, onRegisterClick}) {
           <NavLink to="/call" className="text-gray-700 hover:text-orange-500 font-medium">Convocatorias</NavLink>
           <NavLink to="/profile" className="text-gray-700 hover:text-orange-500 font-medium">Perfil</NavLink>
           <NavLink to="/profile-business" className="text-gray-700 hover:text-orange-500 font-medium">Perfil Empresa</NavLink>
+          <NavLink to="/formalization-wizard" className="text-gray-700 hover:text-orange-500 font-medium">Formalización</NavLink>
 
         </div>
 
