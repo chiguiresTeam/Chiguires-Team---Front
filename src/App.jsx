@@ -15,6 +15,7 @@ import Marketplace from './Pages/Marketplace';
 import ProfileBussiness from './Pages/ProfileBusiness';
 import ProfileUser from './Pages/ProfileUser';
 import FormalizacionWizard from './Pages/FormalizationWizard';
+import CallDetails from './Pages/CallDetails';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,9 @@ const router = createBrowserRouter([
       { path: "/profile", element: <ProfileUser></ProfileUser> },
       { path: "/profile-business", element: <ProfileBussiness></ProfileBussiness> },
       {path: "/marketplace", element: <Marketplace></Marketplace>},
-      {path: "/formalization-wizard", element: <FormalizacionWizard></FormalizacionWizard>}
+      {path: "/formalization-wizard", element: <FormalizacionWizard></FormalizacionWizard>},
+      {path: "/call-details", element: <CallDetails></CallDetails>}
+
     ],
   },
   { path: "/*", element: <NotFound></NotFound> }
