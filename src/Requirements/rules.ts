@@ -1,6 +1,5 @@
 import { Requirement } from "./types";
 
-// Central rules catalog — keep links and wording here to avoid touching logic elsewhere
 export const RULES: Requirement[] = [
   {
     key: "registro_mercantil",

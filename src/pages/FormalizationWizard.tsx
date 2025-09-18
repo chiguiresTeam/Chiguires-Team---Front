@@ -208,11 +208,35 @@ export default function FormalizationWizard() {
     setStepIndex(s => Math.max(s - 1, 0));
   };
 
+  const handleFinish = () => {
+
+    const dataToStore = evaluatedRequirements
+      .filter(r => r.applicable)
+      .map(r => ({
+        key: r.key,
+        title: r.title,
+        state: r.state,
+        category: r.category,
+        optional: !!r.optional
+      }));
+
+    // 2. Guardar en localStorage
+    try {
+      localStorage.setItem('formalizationChecklist', JSON.stringify(dataToStore, null, 2));
+
+      //Aqui puede ir logica para mostrar un modal bonito con el mensaje de exito
+    } catch (error) {
+      console.error('Error al guardar el checklist en localStorage:', error);
+      alert('Error al guardar el checklis, porfavor revisa tu respuestas');
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const setRequirementState = (key: string, state: RequirementState) => {
     setChecklistStates(prev => ({ ...prev, [key]: state }));
   };
 
-  // --- RENDERIZADO DEL COMPONENTE ---
 
   return (
     <section className="py-12 md:py-20 bg-green-50/70">
@@ -229,7 +253,7 @@ export default function FormalizationWizard() {
         <div className="max-w-4xl mx-auto bg-white p-6 md:p-10 rounded-2xl shadow-xl border border-gray-200/80">
           <WizardProgressBar steps={steps} currentStepIndex={stepIndex} />
 
-          {/* Contenido dinámico del paso actual */}
+
           <div className="transition-all duration-300">
             {stepIndex === 0 && (
               <div>
@@ -364,7 +388,7 @@ export default function FormalizationWizard() {
           </div>
         </div>
 
-        {/* Navegación fija en la parte inferior */}
+
         <div className="max-w-4xl mx-auto mt-6 sticky bottom-4">
              <div className="bg-white/80 backdrop-blur-sm supports-backdrop-filter:bg-white/60 border rounded-xl p-3 flex items-center justify-between shadow-lg">
                 <button onClick={handleBack} disabled={stepIndex === 0} className="inline-flex items-center gap-2 rounded-lg font-bold py-2 px-4 text-gray-700 transition-all disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-100">
@@ -378,7 +402,7 @@ export default function FormalizationWizard() {
                     <ArrowRight size={16} />
                 </button>
                 ) : (
-                <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="inline-flex items-center gap-2 rounded-lg font-bold py-2 px-4 bg-green-600 text-white transition-all hover:bg-green-700">
+                <button onClick={handleFinish} className="inline-flex items-center gap-2 rounded-lg font-bold py-2 px-4 bg-green-600 text-white transition-all hover:bg-green-700">
                     <span>Finalizar</span>
                     <Check size={16} />
                 </button>
