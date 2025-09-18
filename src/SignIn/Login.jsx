@@ -1,38 +1,12 @@
-// import React from 'react';
 
-// const Login = () => {
-//   return (
-//     <div>
-//       <h1>Login</h1>
-//     </div>
-//   );
-// };
-
-// export default Login;
-import React from "react";
-import { X, Search } from "lucide-react";
-
-/**
- * LoginModal.jsx — Solo DISEÑO (sin lógica interna)
- * Props esperadas:
- *  - open: boolean (controla visibilidad)
- *  - onClose: () => void
- *  - onSwitchToRegister: () => void (opcional)
- */
 export default function Login({ open = false, onClose, onSwitchToRegister }) {
   return (
     <div
-      className={[
-        "fixed inset-0 z-50 flex items-center justify-center p-4",
-        "bg-black/50 transition-opacity duration-300",
-        open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
-      ].join(" ")}
-      aria-hidden={!open}
-      role="dialog"
-      aria-modal="true"
+      className=
+      "fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 transition-opacity duration-300"
     >
-      {/* Cerrar al hacer click fuera (opcional, delega en onClose) */}
-      <div className="absolute inset-0" onClick={onClose} />
+
+      <div className="absolute inset-0 blur-lg" onClick={onClose} />
 
       <div
         className={[
@@ -47,7 +21,7 @@ export default function Login({ open = false, onClose, onSwitchToRegister }) {
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
           aria-label="Cerrar"
         >
-          <X className="w-6 h-6" />
+          {/* <X className="w-6 h-6" /> */}
         </button>
 
         <h2 className="text-3xl font-bold text-center text-green-800 mb-6">Iniciar Sesión</h2>

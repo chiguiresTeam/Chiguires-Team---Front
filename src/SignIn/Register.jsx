@@ -1,15 +1,16 @@
 
-import React from "react";
-import { X, User, Store } from "lucide-react";
-
-export default function Register({ open = false, onClose, onSwitchToLogin }) {
+export default function RegisterModal({ open = false, onClose, onSwitchToLogin }) {
   return (
     <div
-      className=
-        "fixed inset-0 z-50 flex items-center justify-center p-4"
- 
+      className={[
+        "fixed inset-0 z-50 flex items-center justify-center p-4",
+        "bg-black/50 transition-opacity duration-300",
+        open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
+      ].join(" ")}
+      aria-hidden={!open}
+      role="dialog"
+      aria-modal="true"
     >
-      {/* Cerrar al hacer click fuera (opcional, delega en onClose) */}
       <div className="absolute inset-0" onClick={onClose} />
 
       <div
@@ -25,7 +26,7 @@ export default function Register({ open = false, onClose, onSwitchToLogin }) {
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
           aria-label="Cerrar"
         >
-          <X className="w-6 h-6" />
+          {/* <X className="w-6 h-6" /> */}
         </button>
 
         <h2 className="text-3xl font-bold text-center text-green-800 mb-6">Crea tu Cuenta</h2>
@@ -58,7 +59,7 @@ export default function Register({ open = false, onClose, onSwitchToLogin }) {
             />
           </div>
 
-          {/* Tipo de cuenta */}
+
           <div className="pt-2">
             <label className="block text-sm font-medium text-gray-700 mb-2">Tipo de cuenta</label>
             <div className="flex gap-4">
