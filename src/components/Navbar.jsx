@@ -8,7 +8,7 @@ export default function Navbar({onLoginClick, onRegisterClick}) {
 
         <NavLink to="/" className="flex items-center space-x-2">
           <span className="text-2xl font-bold text-green-800">
-            Vibra<span className="text-orange-500">Llano</span>
+            Impulso<span className="text-orange-500">Llanero</span>
           </span>
         </NavLink>
 
@@ -21,6 +21,7 @@ export default function Navbar({onLoginClick, onRegisterClick}) {
           <NavLink to="/profile" className="text-gray-700 hover:text-orange-500 font-medium">Perfil</NavLink>
           <NavLink to="/profile-business" className="text-gray-700 hover:text-orange-500 font-medium">Perfil Empresa</NavLink>
           <NavLink to="/formalization-wizard" className="text-gray-700 hover:text-orange-500 font-medium">Formalización</NavLink>
+          <NavLink to="/panel" className="text-gray-700 hover:text-orange-500 font-medium">Panel</NavLink>
 
         </div>
 
