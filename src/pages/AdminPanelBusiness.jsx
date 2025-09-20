@@ -1,21 +1,11 @@
-// const AdminPanelBusiness = () => {
-//   return (
-//     <div>
-//       <h1>AdminPanelBusiness</h1>
-//     </div>
-//   );
-// };
-
-// export default AdminPanelBusiness;
 import React from "react";
 import { PlusCircle, FilePenLine, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-/**
- * Dashboard.jsx — Solo DISEÑO (sin lógica)
- * - Tabla de productos, header con botón "Agregar Producto" (sin funcionalidad).
- * - Usa lucide-react para los íconos.
- */
+
 export default function AdminPanelBusiness() {
+  const navigate = useNavigate();
+
   return (
     <section id="dashboard" className="py-20 bg-gray-100">
       <div className="container mx-auto px-6">
@@ -26,6 +16,8 @@ export default function AdminPanelBusiness() {
           </div>
 
           <button
+            onClick={() => navigate("/up-products")}
+
             type="button"
             className="bg-green-700 text-white font-bold py-3 px-6 flex items-center gap-2 w-full sm:w-auto rounded-full hover:bg-green-800 transition shadow-md"
           >

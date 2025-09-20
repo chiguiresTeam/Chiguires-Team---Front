@@ -25,10 +25,11 @@ export default function Navbar({ onLoginClick, onRegisterClick }) {
           <NavLink to="/marketplace" className="text-gray-700 hover:text-orange-500 font-medium">Marketplace</NavLink>
           <NavLink to="/formalization" className="text-gray-700 hover:text-orange-500 font-medium">Formalízate</NavLink>
           <NavLink to="/call" className="text-gray-700 hover:text-orange-500 font-medium">Convocatorias</NavLink>
+
           {auth.user && (
             <>
               <NavLink to="/profile-business" className="text-gray-700 hover:text-orange-500 font-medium">Perfil </NavLink>
-              <NavLink to="/formalization-wizard" className="text-gray-700 hover:text-orange-500 font-medium">Formalización</NavLink>
+              {/* <NavLink to="/formalization-wizard" className="text-gray-700 hover:text-orange-500 font-medium">Formalización</NavLink> */}
               <NavLink to="/panel" className="text-gray-700 hover:text-orange-500 font-medium">Panel</NavLink>
             </>
           )}
@@ -81,7 +82,7 @@ export default function Navbar({ onLoginClick, onRegisterClick }) {
         <NavLink to="/marketplace" className="block py-2 text-gray-700 hover:text-orange-500">Marketplace</NavLink>
         <NavLink to="/formalization" className="block py-2 text-gray-700 hover:text-orange-500">Formalízate</NavLink>
         <NavLink to="/call" className="block py-2 text-gray-700 hover:text-orange-500">Convocatorias</NavLink>
-        
+
         <div className="mt-4 border-t pt-4 space-y-2">
           {auth.user ? (
             <button

@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import useAuth from "../context/AuthContext";
+import React from "react";
 import {
   Camera,
   Mail,
@@ -12,77 +10,16 @@ import {
   PlusCircle,
 } from "lucide-react";
 
-export default function ProfileBusiness() {
-  const { auth } = useAuth();
-  const [activeTab, setActiveTab] = useState('edit');
-
-  const isEdit = activeTab === 'edit';
-  const isProducts = activeTab === 'products';
-
-  // Static/Placeholder Data for Company Details (as requested by user)
-  const staticCompanyData = {
-    logo: "https://placehold.co/128x128/FF7E5F/FFFFFF?text=Logo",
-    businessName: auth.user?.fullName || "Nombre del Negocio", // Use user's full name as business name placeholder
-    userName: auth.user?.fullName || "Tu Nombre",
-    userEmail: auth.user?.email || "tu.correo@ejemplo.com",
-    phone: "+57 300 123 4567",
-    whatsappPhone: "+57 310 987 6543",
-    formalizacion: "Amarillo", // Example: 'Verde', 'Amarillo', 'Rojo'
-    description: "Descripción de la empresa o perfil de usuario. Este es un texto de ejemplo para mantener el diseño original.",
-  };
-
-  // Static/Placeholder Data for Products
-  const staticProducts = [
-    {
-      id: "1",
-      name: "Carne a la Llanera",
-      price: 35000,
-      imageUrl: "https://placehold.co/400x300/FF7E5F/FFFFFF?text=Producto+1",
-    },
-    {
-      id: "2",
-      name: "Picada para 2",
-      price: 50000,
-      imageUrl: "https://placehold.co/400x300/FF7E5F/FFFFFF?text=Producto+4",
-    },
-    // Add more static products if needed to fill the grid
-  ];
-
-  // Helper functions for formalization (reintroduced)
-  const getFormalizationColor = (level) => {
-    switch (level) {
-      case 'Verde': return 'bg-green-500';
-      case 'Amarillo': return 'bg-yellow-400';
-      case 'Rojo': return 'bg-red-500';
-      default: return 'bg-gray-300';
-    }
-  };
-
-  const getFormalizationText = (level) => {
-    switch (level) {
-      case 'Verde': return '¡Felicitaciones! Tu negocio se encuentra al día y formalizado.';
-      case 'Amarillo': return 'Estás en proceso. ¡Sigue así! Completa los siguientes requisitos para estar al 100%:';
-      case 'Rojo': return '¡Impulsa tu negocio! Aún no has iniciado tu proceso de formalización.';
-      default: return 'Estado de formalización desconocido.';
-    }
-  };
-
-  const getFormalizationIcon = (level) => {
-    switch (level) {
-      case 'Verde': return <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-2" />;
-      case 'Amarillo': return <AlertTriangle className="w-8 h-8 text-yellow-500 flex-shrink-0" />;
-      case 'Rojo': return <FileX2 className="w-12 h-12 text-red-500 mx-auto mb-2" />;
-      default: return null;
-    }
-  };
-
-  if (!auth.user) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <p className="text-gray-700 text-lg">Por favor, inicia sesión para ver tu perfil de empresa.</p>
-      </div>
-    );
-  }
+/**
+ * PerfilNegocio.jsx — Versión controlada por props
+ * Props:
+ *  - activeTab: "edit" | "products"
+ *  - setActiveTab: (tab) => void
+ * Nota: Dejo valores por defecto para no romper si se renderiza en modo "solo".
+ */
+export default function PerfilNegocio({ activeTab = "edit", setActiveTab = () => {} }) {
+  const isEdit = activeTab === "edit";
+  const isProducts = activeTab === "products";
 
   return (
     <section id="perfil" className="py-20 bg-gray-50">
@@ -97,7 +34,7 @@ export default function ProfileBusiness() {
             <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
               <div className="relative w-32 h-32 mx-auto mb-4">
                 <img
-                  src={staticCompanyData.logo}
+                  src="https://placehold.co/128x128/FF7E5F/FFFFFF?text=Logo"
                   alt="Foto de perfil"
                   className="rounded-full w-full h-full object-cover border-4 border-white shadow-md"
                 />
@@ -109,17 +46,17 @@ export default function ProfileBusiness() {
                   <Camera className="w-4 h-4" />
                 </button>
               </div>
-              <h3 className="text-2xl font-bold text-green-800">{staticCompanyData.businessName}</h3>
-              <p className="text-gray-500">{staticCompanyData.userName}</p>
+              <h3 className="text-2xl font-bold text-green-800">Asadero El Cumaral</h3>
+              <p className="text-gray-500">Juan Pérez</p>
               <div className="mt-4 text-left space-y-3">
                 <p className="flex items-center text-gray-700">
-                  <Mail className="w-4 h-4 mr-3 text-orange-500" /> {staticCompanyData.userEmail}
+                  <Mail className="w-4 h-4 mr-3 text-orange-500" /> juan.perez@email.com
                 </p>
                 <p className="flex items-center text-gray-700">
-                  <Phone className="w-4 h-4 mr-3 text-orange-500" /> {staticCompanyData.phone}
+                  <Phone className="w-4 h-4 mr-3 text-orange-500" /> 310 123 4567
                 </p>
                 <p className="flex items-center text-gray-700">
-                  <MessageCircle className="w-4 h-4 mr-3 text-orange-500" /> {staticCompanyData.whatsappPhone}
+                  <MessageCircle className="w-4 h-4 mr-3 text-orange-500" /> 310 987 6543
                 </p>
               </div>
             </div>
@@ -130,27 +67,51 @@ export default function ProfileBusiness() {
                 Estado de Formalización
               </h4>
 
-              <div className={`p-4 ${staticCompanyData.formalizacion === 'Verde' ? 'bg-green-50 border-l-4 border-green-500' : staticCompanyData.formalizacion === 'Amarillo' ? 'bg-yellow-50 border-l-4 border-yellow-500' : 'bg-red-50 border-l-4 border-red-500'} rounded-r-lg`}>
+              {/* Caso 1: Completo (oculto por diseño original) */}
+              <div className="text-center p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg hidden">
+                <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-2" />
+                <p className="font-semibold text-green-800">¡Felicitaciones!</p>
+                <p className="text-sm text-green-700">
+                  Tu negocio se encuentra al día y formalizado.
+                </p>
+              </div>
+
+              {/* Caso 2: En Proceso (visible por defecto) */}
+              <div className="p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-lg">
                 <div className="flex items-center gap-3 mb-3">
-                  {getFormalizationIcon(staticCompanyData.formalizacion)}
-                  <p className="font-semibold text-gray-800">
-                    {getFormalizationText(staticCompanyData.formalizacion)}
+                  <AlertTriangle className="w-8 h-8 text-yellow-500 flex-shrink-0" />
+                  <p className="font-semibold text-yellow-800">
+                    Estás en proceso. ¡Sigue así!
                   </p>
                 </div>
-                {staticCompanyData.formalizacion === 'Amarillo' && (
-                  <ul className="text-sm text-gray-700 space-y-2 list-disc list-inside">
-                    <li>Certificado de Bomberos</li>
-                    <li>Curso de manipulación de alimentos</li>
-                  </ul>
-                )}
-                {(staticCompanyData.formalizacion === 'Amarillo' || staticCompanyData.formalizacion === 'Rojo') && (
-                  <button
-                    className="w-full mt-4 bg-orange-500 text-white font-bold py-2 px-4 rounded-full hover:bg-orange-600 text-sm transition"
-                    type="button"
-                  >
-                    {staticCompanyData.formalizacion === 'Amarillo' ? 'Continuar Proceso' : 'Iniciar Proceso Ahora'}
-                  </button>
-                )}
+                <p className="text-sm text-yellow-700 mb-4">
+                  Completa los siguientes requisitos para estar al 100%:
+                </p>
+                <ul className="text-sm text-gray-700 space-y-2 list-disc list-inside">
+                  <li>Certificado de Bomberos</li>
+                  <li>Curso de manipulación de alimentos</li>
+                </ul>
+                <button
+                  className="w-full mt-4 bg-yellow-500 text-white font-bold py-2 px-4 rounded-full hover:bg-yellow-600 text-sm transition"
+                  type="button"
+                >
+                  Continuar Proceso
+                </button>
+              </div>
+
+              {/* Caso 3: No Iniciado (oculto por diseño original) */}
+              <div className="text-center p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg hidden">
+                <FileX2 className="w-12 h-12 text-red-500 mx-auto mb-2" />
+                <p className="font-semibold text-red-800">¡Impulsa tu negocio!</p>
+                <p className="text-sm text-red-700 mb-4">
+                  Aún no has iniciado tu proceso de formalización.
+                </p>
+                <button
+                  className="w-full mt-2 bg-red-500 text-white font-bold py-2 px-4 rounded-full hover:bg-red-600 text-sm transition"
+                  type="button"
+                >
+                  Iniciar Proceso Ahora
+                </button>
               </div>
             </div>
           </div>
@@ -198,7 +159,7 @@ export default function ProfileBusiness() {
                         </label>
                         <input
                           type="text"
-                          defaultValue={staticCompanyData.businessName}
+                          defaultValue="Asadero El Cumaral"
                           className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500"
                         />
                       </div>
@@ -208,7 +169,7 @@ export default function ProfileBusiness() {
                         </label>
                         <input
                           type="text"
-                          defaultValue={staticCompanyData.userName}
+                          defaultValue="Juan Pérez"
                           className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500"
                         />
                       </div>
@@ -221,7 +182,7 @@ export default function ProfileBusiness() {
                         </label>
                         <input
                           type="tel"
-                          defaultValue={staticCompanyData.phone}
+                          defaultValue="310 123 4567"
                           className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500"
                         />
                       </div>
@@ -231,7 +192,7 @@ export default function ProfileBusiness() {
                         </label>
                         <input
                           type="tel"
-                          defaultValue={staticCompanyData.whatsappPhone}
+                          defaultValue="310 987 6543"
                           className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500"
                         />
                       </div>
@@ -243,7 +204,7 @@ export default function ProfileBusiness() {
                       </label>
                       <input
                         type="email"
-                        defaultValue={staticCompanyData.userEmail}
+                        defaultValue="juan.perez@email.com"
                         readOnly
                         className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm bg-gray-100"
                       />
@@ -267,37 +228,57 @@ export default function ProfileBusiness() {
                     <h3 className="text-2xl font-bold text-green-800">
                       Mis Productos y Servicios
                     </h3>
-                    <NavLink
-                      to="/up-products"
+                    <button
                       className="bg-orange-500 text-white font-bold py-2 px-5 rounded-full hover:bg-orange-600 transition flex items-center gap-2"
+                      type="button"
                     >
                       <PlusCircle className="w-5 h-5" />
                       <span>Subir Producto</span>
-                    </NavLink>
+                    </button>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-6">
-                    {staticProducts.map((item) => (
-                      <div key={item.id} className="bg-gray-50 rounded-xl overflow-hidden border">
-                        <img
-                          src={item.imageUrl}
-                          alt={item.name}
-                          className="w-full h-40 object-cover"
-                        />
-                        <div className="p-4">
-                          <h4 className="font-bold text-green-800">{item.name}</h4>
-                          <p className="text-lg font-bold text-orange-500">${item.price.toLocaleString("es-CO")}</p>
-                          <div className="flex gap-2 mt-4">
-                            <button className="w-full bg-green-600 text-white text-sm font-bold py-2 px-3 rounded-lg hover:bg-green-700 transition" type="button">
-                              Editar
-                            </button>
-                            <button className="w-full bg-gray-200 text-gray-700 text-sm font-bold py-2 px-3 rounded-lg hover:bg-gray-300 transition" type="button">
-                              Eliminar
-                            </button>
-                          </div>
+                    {/* Producto 1 */}
+                    <div className="bg-gray-50 rounded-xl overflow-hidden border">
+                      <img
+                        src="https://placehold.co/400x300/FF7E5F/FFFFFF?text=Producto+1"
+                        alt="Producto 1"
+                        className="w-full h-40 object-cover"
+                      />
+                      <div className="p-4">
+                        <h4 className="font-bold text-green-800">Carne a la Llanera</h4>
+                        <p className="text-lg font-bold text-orange-500">$35.000</p>
+                        <div className="flex gap-2 mt-4">
+                          <button className="w-full bg-green-600 text-white text-sm font-bold py-2 px-3 rounded-lg hover:bg-green-700 transition" type="button">
+                            Editar
+                          </button>
+                          <button className="w-full bg-gray-200 text-gray-700 text-sm font-bold py-2 px-3 rounded-lg hover:bg-gray-300 transition" type="button">
+                            Eliminar
+                          </button>
                         </div>
                       </div>
-                    ))}
+                    </div>
+
+                    {/* Producto 2 */}
+                    <div className="bg-gray-50 rounded-xl overflow-hidden border">
+                      <img
+                        src="https://placehold.co/400x300/FF7E5F/FFFFFF?text=Producto+4"
+                        alt="Producto 4"
+                        className="w-full h-40 object-cover"
+                      />
+                      <div className="p-4">
+                        <h4 className="font-bold text-green-800">Picada para 2</h4>
+                        <p className="text-lg font-bold text-orange-500">$50.000</p>
+                        <div className="flex gap-2 mt-4">
+                          <button className="w-full bg-green-600 text-white text-sm font-bold py-2 px-3 rounded-lg hover:bg-green-700 transition" type="button">
+                            Editar
+                          </button>
+                          <button className="w-full bg-gray-200 text-gray-700 text-sm font-bold py-2 px-3 rounded-lg hover:bg-gray-300 transition" type="button">
+                            Eliminar
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}

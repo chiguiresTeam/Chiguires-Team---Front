@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../axios/axios";
-import  useAuth  from "../context/AuthContext"; // 1. Import useAuth
+import useAuth from "../context/AuthContext"; // Import useAuth
 
 async function fetchLogin(userData) {
   if (userData.email === "" || userData.password === "") {
@@ -14,7 +14,7 @@ async function fetchLogin(userData) {
 
 export default function Login({ open = false, onClose, onSwitchToRegister }) {
   const navigate = useNavigate();
-  const { login } = useAuth(); // 2. Get login function from context
+  const { login } = useAuth(); // Get login function from context
 
   const [userData, setUserData] = useState({
     email: "",
@@ -31,9 +31,9 @@ export default function Login({ open = false, onClose, onSwitchToRegister }) {
     try {
       const res = await fetchLogin(userData);
       if (res && res.status === 200) {
-        // The user object is the whole response, and the token might be a property on it
-        const { token, ...user } = res.data;
-        login(user, token || null); // Pass null if token is undefined
+        // The user object is the whole response, no token needed here
+        const user = res.data;
+        login(user); // Only pass the user object
 
         alert("Inicio de sesión exitoso");
         navigate("/"); // redirección a Home

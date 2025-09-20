@@ -48,7 +48,7 @@ export default function CallDetails() {
                     {/* Columna Principal */}
                     <div className="lg:col-span-2 bg-white p-8 rounded-3xl shadow-xl">
                         <img
-                            src="https://placehold.co/800x450/34D399/FFFFFF?text=Fondo+Emprender"
+                            src="https://encolombia.com/wp-content/uploads/2013/02/Fondo-Emprender-SENA.jpg"
                             alt="Banner de la convocatoria"
                             className="rounded-2xl w-full h-auto mb-6"
                         />
