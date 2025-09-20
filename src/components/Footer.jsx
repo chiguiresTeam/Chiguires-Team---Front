@@ -59,7 +59,7 @@ export default function Footer() {
                 <div className="grid md:grid-cols-4 gap-8">
                     <div>
                         <h3 className="text-xl font-bold mb-4">
-                            Vibra<span className="text-orange-400">Llano</span>
+                            Impulso<span className="text-orange-400">Llanero</span>
                         </h3>
                         <p className="text-green-200 flex flex-wrap">
                             Apoyando el corazón comercial de Villavicencio.

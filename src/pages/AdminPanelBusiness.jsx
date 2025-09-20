@@ -1,21 +1,11 @@
-// const AdminPanelBusiness = () => {
-//   return (
-//     <div>
-//       <h1>AdminPanelBusiness</h1>
-//     </div>
-//   );
-// };
-
-// export default AdminPanelBusiness;
 import React from "react";
 import { PlusCircle, FilePenLine, Trash2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-/**
- * Dashboard.jsx — Solo DISEÑO (sin lógica)
- * - Tabla de productos, header con botón "Agregar Producto" (sin funcionalidad).
- * - Usa lucide-react para los íconos.
- */
+
 export default function AdminPanelBusiness() {
+  const navigate = useNavigate();
+
   return (
     <section id="dashboard" className="py-20 bg-gray-100">
       <div className="container mx-auto px-6">
@@ -26,6 +16,8 @@ export default function AdminPanelBusiness() {
           </div>
 
           <button
+            onClick={() => navigate("/up-products")}
+
             type="button"
             className="bg-green-700 text-white font-bold py-3 px-6 flex items-center gap-2 w-full sm:w-auto rounded-full hover:bg-green-800 transition shadow-md"
           >
@@ -34,7 +26,6 @@ export default function AdminPanelBusiness() {
           </button>
         </div>
 
-        {/* Product List Table */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-left text-gray-600">
@@ -48,7 +39,7 @@ export default function AdminPanelBusiness() {
                 </tr>
               </thead>
               <tbody>
-                {/* Product Row 1 */}
+
                 <tr className="border-b hover:bg-gray-50 transition-colors">
                   <td className="p-4">
                     <img src="https://placehold.co/80x80/FF7E5F/FFFFFF?text=Prod+1" alt="Prod 1" className="w-16 h-16 object-cover rounded-lg" />
@@ -66,7 +57,7 @@ export default function AdminPanelBusiness() {
                   </td>
                 </tr>
 
-                {/* Product Row 2 */}
+
                 <tr className="border-b hover:bg-gray-50 transition-colors">
                   <td className="p-4">
                     <img src="https://placehold.co/80x80/FEB47B/FFFFFF?text=Prod+2" alt="Prod 2" className="w-16 h-16 object-cover rounded-lg" />
@@ -84,7 +75,7 @@ export default function AdminPanelBusiness() {
                   </td>
                 </tr>
 
-                {/* Product Row 3 */}
+
                 <tr className="border-b hover:bg-gray-50 transition-colors">
                   <td className="p-4">
                     <img src="https://placehold.co/80x80/9CA3AF/FFFFFF?text=Servicio" alt="Servicio" className="w-16 h-16 object-cover rounded-lg" />

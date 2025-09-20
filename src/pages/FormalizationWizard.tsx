@@ -3,9 +3,7 @@ import { Check, Clock, XCircle, ArrowRight, ArrowLeft, FileCheck, Building, Shie
 import { Flags, Requirement, RequirementState, EvaluatedRequirement, CIIUPreset } from "../Requirements/types";
 import { RULES } from "../Requirements/rules";
 
-// =============================
-// Presets CIIU (demo)
-// =============================
+
 const CIIU_PRESETS: CIIUPreset[] = [
   { code: "5610", name: "Restaurantes y servicios móviles de comida", flags: { handlesFood: true, hasDischarges: true, hasPublicPremises: true } },
   { code: "5511", name: "Alojamiento en hoteles", flags: { isTourismProvider: true, hasPublicPremises: true } },
@@ -13,9 +11,7 @@ const CIIU_PRESETS: CIIUPreset[] = [
   { code: "4711", name: "Comercio minorista no especializado", flags: { hasPublicPremises: true } }
 ];
 
-// =============================
-// Helpers de Lógica (sin cambios)
-// =============================
+
 function compareAforo(cond: Requirement["conditions"], value: number) {
   const r = cond && (cond as any).expectedAforo;
   if (r == null) return true;
@@ -47,7 +43,7 @@ function slugify(s: string) {
 
 
 
-// Badge para estado (Cumplido, Pendiente, N/A)
+
 function RequirementStatusBadge({ state }: { state: RequirementState }) {
   const config = {
     approved: { icon: Check, className: "bg-green-100 text-green-700", label: "Cumplido" },
@@ -63,7 +59,7 @@ function RequirementStatusBadge({ state }: { state: RequirementState }) {
   );
 }
 
-// Stepper visual para el progreso del wizard
+
 function WizardProgressBar({ steps, currentStepIndex }: { steps: readonly { key: string; title: string; icon: React.ElementType }[], currentStepIndex: number }) {
   const progress = Math.round(((currentStepIndex + 1) / steps.length) * 100);
 
@@ -96,7 +92,7 @@ function WizardProgressBar({ steps, currentStepIndex }: { steps: readonly { key:
   );
 }
 
-// Componente para un campo de formulario con label y error
+
 function FormField({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
   return (
     <div className="mb-4">
@@ -107,11 +103,9 @@ function FormField({ label, error, children }: { label: string; error?: string; 
   );
 }
 
-// =============================
-// Componente Principal del Wizard
-// =============================
+
 export default function FormalizationWizard() {
-  // --- ESTADO DEL FORMULARIO ---
+
   const [bizName, setBizName] = useState("");
   const [city, setCity] = useState<string>("Villavicencio");
   const [legalForm, setLegalForm] = useState<Flags["legalForm"]>("Natural");
@@ -125,14 +119,14 @@ export default function FormalizationWizard() {
   const [meetsSICThresholds, setMeetsSICThresholds] = useState(false);
   const [isElectronicInvoicingObliged, setIsElectronicInvoicingObliged] = useState(false);
 
-  // --- ESTADO DEL WIZARD ---
+
   const [stepIndex, setStepIndex] = useState<number>(0);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [checklistStates, setChecklistStates] = useState<Record<string, RequirementState>>({});
 
-  // --- DATOS Y LÓGICA DERIVADA ---
 
-  // Definición de los pasos del wizard
+
+
   const steps = useMemo(() => [
     { key: "identidad", title: "Identificación", icon: Building },
     { key: "riesgos", title: "Local y Riesgos", icon: Shield },
@@ -140,7 +134,7 @@ export default function FormalizationWizard() {
     { key: "checklist", title: "Mi Checklist", icon: FileCheck }
   ] as const, []);
 
-  // Auto-rellenado de flags basado en el código CIIU seleccionado
+
   useEffect(() => {
     const preset = CIIU_PRESETS.find(p => p.code === ciiu);
     if (!preset) return;
@@ -150,7 +144,7 @@ export default function FormalizationWizard() {
     setIsTourismProvider(prev => prev || !!preset.flags.isTourismProvider);
   }, [ciiu]);
 
-  // Objeto 'flags' que agrupa todas las respuestas del usuario
+
   const flags: Flags = useMemo(() => ({
     city: (city || "").trim() || "Villavicencio",
     legalForm, ciiu, hasPublicPremises,
@@ -159,7 +153,7 @@ export default function FormalizationWizard() {
     processesPersonalData, meetsSICThresholds, isElectronicInvoicingObliged
   }), [city, legalForm, ciiu, hasPublicPremises, expectedAforo, handlesFood, hasDischarges, isTourismProvider, processesPersonalData, meetsSICThresholds, isElectronicInvoicingObliged]);
 
-  // Evaluación de qué requerimientos aplican basado en las 'flags'
+
   const evaluatedRequirements: EvaluatedRequirement[] = useMemo(() =>
     RULES.map(r => ({
       ...r,
@@ -168,7 +162,7 @@ export default function FormalizationWizard() {
     })),
   [flags, checklistStates]);
 
-  // Agrupación de requerimientos aplicables por categoría para mostrarlos en el checklist
+
   const groupedChecklist = useMemo(() => {
     const grouped: Record<string, EvaluatedRequirement[]> = {};
     evaluatedRequirements.forEach(er => {
@@ -179,7 +173,7 @@ export default function FormalizationWizard() {
     return grouped;
   }, [evaluatedRequirements]);
 
-  // Validación de errores para el paso actual
+
   const stepErrors = useMemo(() => {
     const e: Record<string, string> = {};
     if (stepIndex === 0) {
@@ -192,7 +186,7 @@ export default function FormalizationWizard() {
     return e;
   }, [stepIndex, bizName, city, hasPublicPremises, expectedAforo]);
 
-  // --- MANEJADORES DE EVENTOS ---
+
 
   const handleNext = () => {
     if (Object.keys(stepErrors).length > 0) {
@@ -220,11 +214,11 @@ export default function FormalizationWizard() {
         optional: !!r.optional
       }));
 
-    // 2. Guardar en localStorage
-    try {
+
+      try {
       localStorage.setItem('formalizationChecklist', JSON.stringify(dataToStore, null, 2));
 
-      //Aqui puede ir logica para mostrar un modal bonito con el mensaje de exito
+
     } catch (error) {
       console.error('Error al guardar el checklist en localStorage:', error);
       alert('Error al guardar el checklis, porfavor revisa tu respuestas');

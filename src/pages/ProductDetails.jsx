@@ -1,18 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useLocation, useNavigate, Link, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, MessageCircle, MapPin, Phone, ArrowLeftCircle } from "lucide-react";
+import { X, MessageCircle, MapPin, Phone, ArrowLeftCircle, ShoppingCart, Star } from "lucide-react";
+import api from "../axios/axios";
 
-// --- Modal Component (for hover preview) ---
-// This is not exported directly, it's used by ProductHoverPreview
-function ProductDetailModal({ open = false, onClose = () => {}, company = {} }) {
+export function ProductDetailModal({ open = false, onClose = () => {}, company }) {
   const {
     name = "Nombre de la Empresa",
     formalizacion = "gray",
     description = "Descripción de la empresa y sus productos.",
     address = "Dirección de la empresa",
     phone = "Número de teléfono",
-  } = company;
+  } = company || {};
 
   const whatsappUrl = `https://wa.me/${phone.replace(/[^0-9]/g, "")}`;
 
@@ -75,77 +74,69 @@ function ProductDetailModal({ open = false, onClose = () => {}, company = {} }) 
   );
 }
 
-// --- Hover Preview Wrapper (Named Export) ---
-export function ProductHoverPreview({ company = {}, children, delay = 1500 }) {
-  const [open, setOpen] = useState(false);
-  const timerRef = useRef(null);
-
-  useEffect(() => {
-    return () => clearTimeout(timerRef.current);
-  }, []);
-
-  const handleMouseEnter = () => {
-    clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setOpen(true), delay);
-  };
-
-  const handleMouseLeave = () => {
-    clearTimeout(timerRef.current);
-    setOpen(false);
-  };
-
-  const handleTouchStart = (e) => {
-    e.stopPropagation();
-    setOpen(true);
-  };
-
-  return (
-    <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onTouchStart={handleTouchStart} className="h-full relative">
-      {children}
-      <ProductDetailModal open={open} onClose={() => setOpen(false)} company={company} />
-    </div>
-  );
-}
-
-
-// --- Product Detail Page (Default Export) ---
 export default function ProductDetailsPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { product } = state || {};
+  const { productId } = useParams();
+
+  const [product, setProduct] = useState(state?.product || null);
+  const [loading, setLoading] = useState(!state?.product);
+  const [error, setError] = useState(null);
 
   const [otherProducts, setOtherProducts] = useState([]);
   const [activePhoto, setActivePhoto] = useState(0);
 
-  // Fetch other products
   useEffect(() => {
-    const fetchOtherProducts = async () => {
-      try {
-        const response = await fetch('http://144.202.38.22:8080/api/v1/products');
-        const data = await response.json();
-        const filtered = (data.content || []).filter(p => p.id !== product?.id).slice(0, 4);
-        setOtherProducts(filtered);
-      } catch (error) {
-        console.error("Error fetching other products:", error);
-      }
-    };
+    if (!product) {
+      const fetchProductById = async () => {
+        try {
+          setLoading(true);
+          const response = await api.get(`/products/${productId}`);
+          setProduct(response.data);
+        } catch (err) {
+          setError("No se pudo cargar el producto. Inténtalo de nuevo más tarde.");
+          console.error("Error fetching product by ID:", err);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchProductById();
+    }
+  }, [productId, product]); 
 
-    if (product) {
+  useEffect(() => {
+    if (product) {       const fetchOtherProducts = async () => {
+        try {
+          const response = await api.get("/products");
+          const filtered = (response.data.content || []).filter(p => p.id !== product.id).slice(0, 4);
+          setOtherProducts(filtered);
+        } catch (err) {
+          console.error("Error fetching other products:", err);
+        }
+      };
       fetchOtherProducts();
     }
   }, [product]);
 
-  // Reset active photo when product changes
+
   useEffect(() => {
     setActivePhoto(0);
   }, [product]);
 
+  if (loading) {
+    return <div className="text-center py-20">Cargando producto...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center py-20 text-red-500">Error: {error}</div>;
+  }
+
   if (!product) {
-    return <div className="text-center py-20">Producto no encontrado o no se ha podido cargar.</div>;
+    return <div className="text-center py-20">Producto no encontrado.</div>;
   }
 
   const photos = product.images && product.images.length > 0 ? product.images : ['https://placehold.co/800x800/CCCCCC/FFFFFF?text=Sin+Imagen'];
-  const whatsappUrl = product.company?.phone ? `https://wa.me/${product.company.phone.replace(/[^0-9]/g, "") }?text=Hola, vi tu producto \"${product.name}\" en el Marketplace Local.` : null;
+  const whatsappUrl = product.company?.phone ? `https://wa.me/${product.company.phone.replace(/[^0-9]/g, "")}?text=Hola, vi tu producto \"${product.name}\" en el Marketplace Local.` : null;
 
   return (
     <div className="min-h-screen w-full bg-gray-50">
@@ -153,7 +144,7 @@ export default function ProductDetailsPage() {
 
         <div className="mb-6">
           <button
-            onClick={() => navigate("/marketplace")}
+            onClick={() => navigate(-1)}
             className="flex items-center gap-2 text-gray-600 hover:text-green-800 font-semibold cursor-pointer hover:underline"
           >
             <ArrowLeftCircle className="w-5 h-5" />
@@ -161,9 +152,9 @@ export default function ProductDetailsPage() {
           </button>
         </div>
 
-        <div className="bg-white p-6 md:p-8 rounded-2xl shadow-lg ">
+        <div className="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 ">
-            {/* Image Gallery */}
+
             <div>
               <div className="w-full aspect-square rounded-lg overflow-hidden shadow-md mb-4">
                 <img
@@ -186,7 +177,7 @@ export default function ProductDetailsPage() {
               )}
             </div>
 
-            {/* Product Info */}
+
             <div>
               <span className="inline-block text-sm font-semibold bg-orange-100 text-orange-800 px-3 py-1 rounded-full">
                 {product.company?.sector || "General"}
@@ -253,11 +244,11 @@ export default function ProductDetailsPage() {
           </div>
         </div>
 
-        {/* Other Products */}
+
         <div className="mt-16">
           <h2 className="text-3xl font-bold text-green-800 mb-6">Proximamente</h2>
-          <h2 className="text-3xl font-bold text-green-600 mb-6"> mas implementaciones..</h2>
-          {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h2 className="text-3xl font-bold text-green-600 mb-6">mas funcionalidades...</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {otherProducts.map((item) => (
               <Link to={`/product/${item.id}`} state={{ product: item }} key={item.id} className="block">
                 <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 h-full">
@@ -277,7 +268,7 @@ export default function ProductDetailsPage() {
                 </div>
               </Link>
             ))}
-          </div> */}
+          </div>
         </div>
 
       </div>

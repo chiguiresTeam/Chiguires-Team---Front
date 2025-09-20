@@ -15,9 +15,11 @@ import ProfileBussiness from './Pages/ProfileBusiness';
 import ProfileUser from './Pages/ProfileUser';
 import FormalizacionWizard from './Pages/FormalizationWizard';
 import CallDetails from './Pages/CallDetails';
+import UpProducts from './Pages/UpProducts';
+import CallB from './Pages/CallB';
 
 
-import  useAuth  from './context/AuthContext';
+import useAuth from './context/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -32,11 +34,13 @@ const router = createBrowserRouter([
       { path: "/register", element: <Register></Register> },
       { path: "/profile", element: <ProfileUser></ProfileUser> },
       { path: "/profile-business", element: <ProfileBussiness></ProfileBussiness> },
-      {path: "/marketplace", element: <Marketplace></Marketplace>},
-      {path: "/formalization-wizard", element: <FormalizacionWizard></FormalizacionWizard>},
-      {path: "/call-details", element: <CallDetails></CallDetails>},
-      {path: "/panel", element: <AdminPanelBusiness> </AdminPanelBusiness>},
-      {path: "/product/:productId", element: <ProductDetailsPage />}
+      { path: "/marketplace", element: <Marketplace></Marketplace> },
+      { path: "/formalization-wizard", element: <FormalizacionWizard></FormalizacionWizard> },
+      { path: "/call-details", element: <CallDetails></CallDetails> },
+      { path: "/panel", element: <AdminPanelBusiness> </AdminPanelBusiness> },
+      { path: "/product/:productId", element: <ProductDetailsPage /> },
+      { path: "/up-products", element: <UpProducts></UpProducts> },
+      {path: "/callB", element: <CallB></CallB>}
 
     ],
   },

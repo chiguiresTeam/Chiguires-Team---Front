@@ -37,7 +37,7 @@ export default function RegisterModal({
   const [userData, setUserData] = useState({
     email: "",
     password: "",
-    rolUserId: "", // mantenemos string
+    rolUserId: "", 
   });
 
   const handlePersonChange = (e) => {

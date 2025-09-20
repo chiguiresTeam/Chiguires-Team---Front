@@ -70,7 +70,7 @@ export default function Home() {
       <section className="relative py-24 bg-gradient-to-r from-green-50 to-green-100">
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
           
-          {/* Texto principal */}
+
           <div>
             <span className="text-orange-500 font-bold uppercase tracking-wide">
               Confianza y Crecimiento
@@ -83,7 +83,7 @@ export default function Home() {
               y te guiamos paso a paso hasta llegar al 100%.
             </p>
 
-            {/* Niveles de formalización */}
+
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <CheckCircle className="text-green-500 w-6 h-6" />
@@ -105,7 +105,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* CTA */}
+
             <NavLink
               to="/formalization"
               onClick={() => window.scrollTo(0, 0)}
@@ -115,7 +115,7 @@ export default function Home() {
             </NavLink>
           </div>
 
-          {/* Testimonio */}
+
           <TestimonialCarousel />
         </div>
       </section>
