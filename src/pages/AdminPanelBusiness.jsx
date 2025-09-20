@@ -2,7 +2,7 @@ import React from "react";
 import { PlusCircle, FilePenLine, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-
+const semaforization = localStorage.getItem("formalizationChecklist")
 export default function AdminPanelBusiness() {
   const navigate = useNavigate();
 
