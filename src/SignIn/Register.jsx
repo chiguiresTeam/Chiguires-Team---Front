@@ -10,11 +10,9 @@ async function fetchSignUp(personData, userData) {
     alert("Por favor, complete todos los campos de datos de usuario.");
     return;
   }
-  // 1. Crear persona
   const resPerson = await api.post("/people", personData);
   const personId = resPerson.data.cc;
 
-  // 2. Crear usuario asociado (convertimos rolUserId a número)
   const resUser = await api.post("/auth/sign-up", {
     ...userData,
     rolUserId: Number(userData.rolUserId),
