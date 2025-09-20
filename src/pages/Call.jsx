@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import api from "../axios/axios";
 import bgConvocatorias from "../assets/convocatoria.jpg";
 
-// Helper function to format date
+
 const formatDate = (dateString) => {
   try {
     const date = new Date(dateString);
@@ -62,7 +62,7 @@ export default function Call() {
               <p className="text-center text-red-500">{error}</p>
             ) : events.length > 0 ? (
               events.map((event, index) => {
-                const { day, month } = formatDate(event.startDate); // Assuming API provides startDate
+                const { day, month } = formatDate(event.startDate); 
                 const isOrange = index % 2 === 0;
 
                 return (

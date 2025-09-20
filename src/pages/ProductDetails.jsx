@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, MessageCircle, MapPin, Phone, ArrowLeftCircle, ShoppingCart, Star } from "lucide-react";
 import api from "../axios/axios";
 
-// --- Modal Component (Named Export) ---
 export function ProductDetailModal({ open = false, onClose = () => {}, company }) {
   const {
     name = "Nombre de la Empresa",
@@ -75,20 +74,18 @@ export function ProductDetailModal({ open = false, onClose = () => {}, company }
   );
 }
 
-// --- Product Detail Page (Default Export) ---
 export default function ProductDetailsPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { productId } = useParams();
 
   const [product, setProduct] = useState(state?.product || null);
-  const [loading, setLoading] = useState(!state?.product); // Set loading true if product not in state
+  const [loading, setLoading] = useState(!state?.product);
   const [error, setError] = useState(null);
 
   const [otherProducts, setOtherProducts] = useState([]);
   const [activePhoto, setActivePhoto] = useState(0);
 
-  // Fetch main product if not available from location state
   useEffect(() => {
     if (!product) {
       const fetchProductById = async () => {
@@ -105,12 +102,10 @@ export default function ProductDetailsPage() {
       };
       fetchProductById();
     }
-  }, [productId, product]); // Depend on productId and product (to avoid re-fetching if already set)
+  }, [productId, product]); 
 
-  // Fetch other products
   useEffect(() => {
-    if (product) { // Only fetch other products if main product is loaded
-      const fetchOtherProducts = async () => {
+    if (product) {       const fetchOtherProducts = async () => {
         try {
           const response = await api.get("/products");
           const filtered = (response.data.content || []).filter(p => p.id !== product.id).slice(0, 4);
@@ -123,7 +118,7 @@ export default function ProductDetailsPage() {
     }
   }, [product]);
 
-  // Reset active photo when product changes
+
   useEffect(() => {
     setActivePhoto(0);
   }, [product]);
@@ -159,7 +154,7 @@ export default function ProductDetailsPage() {
 
         <div className="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 ">
-            {/* Image Gallery */}
+
             <div>
               <div className="w-full aspect-square rounded-lg overflow-hidden shadow-md mb-4">
                 <img
@@ -182,7 +177,7 @@ export default function ProductDetailsPage() {
               )}
             </div>
 
-            {/* Product Info */}
+
             <div>
               <span className="inline-block text-sm font-semibold bg-orange-100 text-orange-800 px-3 py-1 rounded-full">
                 {product.company?.sector || "General"}
@@ -249,7 +244,7 @@ export default function ProductDetailsPage() {
           </div>
         </div>
 
-        {/* Other Products */}
+
         <div className="mt-16">
           <h2 className="text-3xl font-bold text-green-800 mb-6">Proximamente</h2>
           <h2 className="text-3xl font-bold text-green-600 mb-6">mas funcionalidades...</h2>

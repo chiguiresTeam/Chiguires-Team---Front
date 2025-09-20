@@ -13,7 +13,7 @@ export default function UpProducts() {
         description: "",
         price: "",
         stock: "",
-        images: [""], // Start with one empty string for a single image URL input
+        images: [""],
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -23,7 +23,7 @@ export default function UpProducts() {
     };
 
     const handleImageChange = (e) => {
-        // For now, we only handle one image URL
+
         setProductData(prev => ({ ...prev, images: [e.target.value] }));
     }
 
@@ -58,7 +58,7 @@ export default function UpProducts() {
             await api.post("/products", dataToSend);
             console.log("5. API call successful!");
             alert("¡Producto creado con éxito!");
-            navigate("/panel"); // O a la página del marketplace/panel
+            navigate("/panel"); 
         } catch (error) {
             console.error("Error creating product:", error);
             alert("Hubo un error al crear el producto. Revisa los datos e inténtalo de nuevo.");
@@ -81,7 +81,7 @@ export default function UpProducts() {
                 </div>
 
                 <form className="bg-white p-8 rounded-2xl shadow-lg grid lg:grid-cols-3 gap-8" onSubmit={handleSubmit}>
-                    {/* Columna Izquierda: Detalles del producto */}
+
                     <div className="lg:col-span-2 space-y-6">
                         <div>
                             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Nombre del Producto/Servicio</label>
@@ -109,7 +109,7 @@ export default function UpProducts() {
                         </div>
                     </div>
 
-                    {/* Columna Derecha: Imágenes y Publicación */}
+
                     <div className="lg:col-span-1 space-y-6">
                         <div>
                             <label htmlFor="images" className="block text-sm font-medium text-gray-700 mb-1">URL de la Imagen Principal</label>

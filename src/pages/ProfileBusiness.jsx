@@ -19,19 +19,20 @@ export default function ProfileBusiness() {
   const isEdit = activeTab === 'edit';
   const isProducts = activeTab === 'products';
 
-  // Static/Placeholder Data for Company Details (as requested by user)
+
   const staticCompanyData = {
     logo: "https://placehold.co/128x128/FF7E5F/FFFFFF?text=Logo",
-    businessName: auth.user?.fullName || "Nombre del Negocio", // Use user's full name as business name placeholder
+    businessName: auth.user?.fullName || "Nombre del Negocio", 
+
     userName: auth.user?.fullName || "Tu Nombre",
     userEmail: auth.user?.email || "tu.correo@ejemplo.com",
     phone: "+57 300 123 4567",
     whatsappPhone: "+57 310 987 6543",
-    formalizacion: "Amarillo", // Example: 'Verde', 'Amarillo', 'Rojo'
+    formalizacion: "Amarillo", 
     description: "Descripción de la empresa o perfil de usuario. Este es un texto de ejemplo para mantener el diseño original.",
   };
 
-  // Static/Placeholder Data for Products
+
   const staticProducts = [
     {
       id: "1",
@@ -45,10 +46,10 @@ export default function ProfileBusiness() {
       price: 50000,
       imageUrl: "https://placehold.co/400x300/FF7E5F/FFFFFF?text=Producto+4",
     },
-    // Add more static products if needed to fill the grid
+
   ];
 
-  // Helper functions for formalization (reintroduced)
+
   const getFormalizationColor = (level) => {
     switch (level) {
       case 'Verde': return 'bg-green-500';
@@ -92,7 +93,7 @@ export default function ProfileBusiness() {
         </h2>
 
         <div className="grid lg:grid-cols-3 gap-8 items-start">
-          {/* Columna Izquierda: Tarjeta de Perfil */}
+
           <div className="lg:col-span-1 space-y-8 sticky top-28">
             <div className="bg-white p-6 rounded-2xl shadow-lg text-center">
               <div className="relative w-32 h-32 mx-auto mb-4">
@@ -124,7 +125,7 @@ export default function ProfileBusiness() {
               </div>
             </div>
 
-            {/* Estado de Formalización */}
+
             <div className="bg-white p-6 rounded-2xl shadow-lg">
               <h4 className="font-bold text-lg text-green-800 mb-4 text-center">
                 Estado de Formalización
@@ -155,10 +156,10 @@ export default function ProfileBusiness() {
             </div>
           </div>
 
-          {/* Columna Derecha: Contenido Principal */}
+
           <div className="lg:col-span-2">
             <div className="bg-white p-8 rounded-2xl shadow-lg">
-              {/* Pestañas de Navegación controladas */}
+
               <div className="flex border-b mb-6">
                 <button
                   className={`py-3 px-6 font-semibold transition-colors ${
@@ -184,7 +185,7 @@ export default function ProfileBusiness() {
                 </button>
               </div>
 
-              {/* Contenido según la pestaña activa */}
+
               {isEdit && (
                 <div>
                   <h3 className="text-2xl font-bold text-green-800 mb-6">

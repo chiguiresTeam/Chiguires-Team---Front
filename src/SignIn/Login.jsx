@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../axios/axios";
-import useAuth from "../context/AuthContext"; // Import useAuth
+import useAuth from "../context/AuthContext"; 
 
 async function fetchLogin(userData) {
   if (userData.email === "" || userData.password === "") {
@@ -14,7 +14,7 @@ async function fetchLogin(userData) {
 
 export default function Login({ open = false, onClose, onSwitchToRegister }) {
   const navigate = useNavigate();
-  const { login } = useAuth(); // Get login function from context
+  const { login } = useAuth(); 
 
   const [userData, setUserData] = useState({
     email: "",
@@ -31,12 +31,12 @@ export default function Login({ open = false, onClose, onSwitchToRegister }) {
     try {
       const res = await fetchLogin(userData);
       if (res && res.status === 200) {
-        // The user object is the whole response, no token needed here
+
         const user = res.data;
-        login(user); // Only pass the user object
+        login(user); 
 
         alert("Inicio de sesión exitoso");
-        navigate("/"); // redirección a Home
+        navigate("/"); 
         onClose();
       }
     } catch (err) {
@@ -71,7 +71,7 @@ export default function Login({ open = false, onClose, onSwitchToRegister }) {
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
           aria-label="Cerrar"
         >
-          {/* Ícono opcional */}
+
         </button>
 
         <h2 className="text-3xl font-bold text-center text-green-800 mb-6">

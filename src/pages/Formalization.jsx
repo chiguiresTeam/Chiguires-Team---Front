@@ -13,7 +13,7 @@ export default function Formalization() {
         </div>
       <section className="flex items-center bg-green-50">
         <div className="max-w-xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-xl"> 
-          {/* Step 1 */}
+
           <div className="flex flex-col gap-6 pb-6 mb-6">
             <div className="flex flex-col items-center justify-center text-center py-6">
               <div className="w-16 h-16 bg-orange-500 text-white text-3xl font-bold flex items-center justify-center rounded-full mb-4">

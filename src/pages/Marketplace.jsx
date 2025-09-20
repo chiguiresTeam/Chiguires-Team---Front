@@ -133,7 +133,7 @@ export default function Marketplace() {
 
   return (
     <section id="marketplace" className="py-20 bg-gray-50 relative overflow-hidden">
-      {/* Background decorations */}
+
       <div className="absolute top-0 left-0 -translate-x-1/4 -translate-y-1/4 text-orange-100/50 z-0 pointer-events-none select-none">
         <svg width="600" height="600" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M49.8,-57.9C62,-44.9,67.6,-26.3,69.2,-6.9C70.8,12.5,68.4,32.7,57.7,46.4C47,60.1,28.1,67.2,8.1,69.5C-11.8,71.8,-31.8,69.2,-47.4,59.3C-63,49.4,-74.2,32.2,-77.3,13.2C-80.4,-5.8,-75.4,-26.6,-63.9,-40.4C-52.4,-54.2,-34.4,-61,-17.7,-63.1C-1,-65.2,14.5,-62.7,27.1,-63.3C39.7,-63.9,49.8,-57.9,49.8,-57.9Z" transform="translate(100 100)" /></svg>
       </div>
@@ -145,7 +145,7 @@ export default function Marketplace() {
         <h2 className="text-4xl font-bold text-center text-green-800 mb-4">Marketplace Local</h2>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Explora la riqueza de productos y servicios que Villavicencio tiene para ofrecer.</p>
 
-        {/* Sort Dropdown */}
+
         <div className="flex justify-start mb-8">
           <select 
             onChange={(e) => setSortOrder(e.target.value)}
@@ -158,13 +158,13 @@ export default function Marketplace() {
           </select>
         </div>
 
-        {/* Products Grid */}
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {renderContent()}
         </div>
       </div>
 
-      {/* Singleton Modal */}
+
       <ProductDetailModal 
         open={!!modalCompany}
         onClose={() => setModalCompany(null)}
