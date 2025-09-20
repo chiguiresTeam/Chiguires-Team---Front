@@ -17,6 +17,8 @@ import FormalizacionWizard from './Pages/FormalizationWizard';
 import CallDetails from './Pages/CallDetails';
 
 
+import  useAuth  from './context/AuthContext';
+
 const router = createBrowserRouter([
   {
     element: <StandardLayout></StandardLayout>,
@@ -42,9 +44,20 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  return (<>
+  const { loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 bg-white flex items-center justify-center z-[999]">
+        <div className="text-2xl font-bold text-green-800">Cargando...</div>
+      </div>
+    );
+  }
+
+  return (
     <RouterProvider router={router}></RouterProvider>
-  </>);
+  );
 }
+
 
 export default App;

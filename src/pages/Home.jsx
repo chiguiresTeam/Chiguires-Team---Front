@@ -15,15 +15,13 @@ export default function Home() {
           <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto">
             La plataforma que une el comercio local. Encuentra productos únicos y apoya a los negocios de nuestra tierra.
           </p>
-          <div className="relative max-w-2xl mx-auto">
-            <input
-              type="text"
-              placeholder="Busca productos, servicios o negocios..."
-              className="w-full py-4 px-6 rounded-full text-gray-800 shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-300"
-            />
-            <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-green-200/75 p-3 rounded-full hover:bg-green-300/75 transition">
-              <img src="https://img.icons8.com/?size=50&id=132&format=png" className="w-5 h-5 text-white" />
-            </button>
+          <div className="max-w-2xl mx-auto">
+            <NavLink
+              to="/marketplace"
+              className="inline-block px-10 py-4 bg-white text-orange-500 font-bold rounded-full shadow-2xl transform hover:scale-105 transition-transform duration-300 ease-in-out text-lg"
+            >
+              Explorar el Marketplace
+            </NavLink>
           </div>
         </div>
       </div>
