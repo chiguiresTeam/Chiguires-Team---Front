@@ -1,10 +1,9 @@
 import { NavLink } from "react-router-dom";
-export default function Home() {
-  const btnPrimary =
-    "inline-block bg-green-700 text-white font-bold py-3 px-6 rounded-full hover:bg-green-800 transition duration-300 ease-in-out transform hover:scale-105 shadow-lg";
-  const formalDot =
-    "w-4 h-4 rounded-full inline-block mr-2 border-2 border-white shadow-sm";
+import { CheckCircle, AlertCircle, XCircle, Quote } from "lucide-react";
+import TestimonialCarousel from "../components/TestimonialCarousel";
 
+export default function Home() {
+  
   return (
     <section id="inicio" className="pt-14">
 
@@ -70,55 +69,58 @@ export default function Home() {
       </div>
 
 
-      <div className="py-20 bg-gray-50">
-        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <section className="relative py-24 bg-gradient-to-r from-green-50 to-green-100">
+        <div className="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+          
+          {/* Texto principal */}
           <div>
-            <span className="text-orange-500 font-semibold">CONFIANZA Y CRECIMIENTO</span>
-            <h2 className="text-4xl font-bold text-green-800 mt-2 mb-4">
-              Te ayudamos A Formalizar
+            <span className="text-orange-500 font-bold uppercase tracking-wide">
+              Confianza y Crecimiento
+            </span>
+            <h2 className="text-5xl font-extrabold text-green-800 leading-tight mt-4 mb-6">
+              Te ayudamos a <span className="text-orange-500">Formalizar</span> tu negocio
             </h2>
-            <p className="text-gray-600 mb-6">
-              Implementamos un sistema que te mostrara el nivel de formalizacion de tu negocio, te ayudamos a estar al 100.
+            <p className="text-gray-600 text-lg mb-8 max-w-lg">
+              Implementamos un sistema que te muestra el nivel de formalización de tu negocio 
+              y te guiamos paso a paso hasta llegar al 100%.
             </p>
+
+            {/* Niveles de formalización */}
             <div className="space-y-4">
-              <div className="flex items-center">
-                <span className={`${formalDot} bg-green-500`}></span>
-                <strong className="text-green-600 mr-2">Verde:</strong>
-                <span className="text-gray-700">Negocio 100% formalizado y en regla. ¡Máxima confianza!</span>
+              <div className="flex items-center gap-3">
+                <CheckCircle className="text-green-500 w-6 h-6" />
+                <span className="text-gray-700">
+                  <strong className="text-green-600">Verde:</strong> Negocio 100% formalizado y en regla. ¡Máxima confianza!
+                </span>
               </div>
-              <div className="flex items-center">
-                <span className={`${formalDot} bg-yellow-400`}></span>
-                <strong className="text-yellow-600 mr-2">Amarillo:</strong>
-                <span className="text-gray-700">En proceso de formalización. ¡Ya diste el primer paso!</span>
+              <div className="flex items-center gap-3">
+                <AlertCircle className="text-yellow-500 w-6 h-6" />
+                <span className="text-gray-700">
+                  <strong className="text-yellow-600">Amarillo:</strong> En proceso de formalización. ¡Ya diste el primer paso!
+                </span>
               </div>
-              <div className="flex items-center">
-                <span className={`${formalDot} bg-red-500`}></span>
-                <strong className="text-red-600 mr-2">Rojo:</strong>
-                <span className="text-gray-700">Negocio informal. ¡Te ayudamos a empezar el camino!</span>
+              <div className="flex items-center gap-3">
+                <XCircle className="text-red-500 w-6 h-6" />
+                <span className="text-gray-700">
+                  <strong className="text-red-600">Rojo:</strong> Negocio informal. ¡Te ayudamos a empezar el camino!
+                </span>
               </div>
             </div>
-            {/* <a href="/formalization" className={`${btnPrimary} mt-8`}>Quiero formalizarme</a> */}
-            <NavLink to="/formalization" onClick={() => window.scrollTo(0, 0)} className={`${btnPrimary} mt-4`}>Ver formalizaciones</NavLink>
-        
+
+            {/* CTA */}
+            <NavLink
+              to="/formalization"
+              onClick={() => window.scrollTo(0, 0)}
+              className="inline-block mt-10 px-8 py-4 bg-orange-500 text-white font-bold rounded-full shadow-lg hover:bg-orange-600 transition"
+            >
+              Ver formalizaciones
+            </NavLink>
           </div>
 
-          <div className="bg-white p-8 rounded-2xl shadow-xl">
-            <img
-              src="https://placehold.co/600x400/34D399/FFFFFF?text=Negocio+Local+Exitoso"
-              alt="Negocio local sonriendo"
-              className="rounded-lg mb-6 w-full h-auto"
-            />
-            <h4 className="font-bold text-lg text-green-800">"Artesanías El Caporal"</h4>
-            <div className="flex items-center mt-2">
-              <span className={`${formalDot} bg-green-500`}></span>
-              <span className="text-gray-700">Nivel de formalización: Completo</span>
-            </div>
-            <p className="text-gray-500 mt-2 text-sm">
-              "Desde que completé mi formalización con la ayuda de la plataforma, mis ventas aumentaron un 40%. Los clientes confían más."
-            </p>
-          </div>
+          {/* Testimonio */}
+          <TestimonialCarousel />
         </div>
-      </div>
+      </section>
     </section>
   );
 }

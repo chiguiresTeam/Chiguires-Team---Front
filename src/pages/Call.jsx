@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import bgConvocatorias from "../assets/convocatoria.jpg";
 export default function Call() {
   return (
     <section id="convocatorias" className="py-20 bg-white">
@@ -7,7 +7,7 @@ export default function Call() {
 
         <div
           className="relative bg-cover bg-center py-20 mb-12 rounded-lg shadow-lg"
-          style={{ backgroundImage: "url('https://via.placeholder.com/1500x400/008080/FFFFFF?text=Oportunidades+y+Convocatorias')" }}
+          style={{ backgroundImage: `url(${bgConvocatorias})` }}
         >
           <div className="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
           <div className="relative container mx-auto px-6 text-white text-center">
