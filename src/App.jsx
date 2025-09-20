@@ -1,7 +1,7 @@
 import './App.css';
 import StandardLayout from './Layouts/StandardLayout';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-
+import ProductDetailsPage from './Pages/ProductDetails';
 import Home from './Pages/Home';
 import Formalization from './Pages/Formalization';
 import AdminPanelBusiness from './Pages/AdminPanelBusiness';
@@ -9,13 +9,13 @@ import AdminPanelTownHall from './Pages/AdminPanelTownHall';
 import AdminPanelUser from './Pages/AdminPanelUser';
 import Call from './Pages/Call';
 import Register from './SignIn/Register';
-import Profile from './Pages/ProfileUser';
 import NotFound from './Pages/NotFound';
 import Marketplace from './Pages/Marketplace';
 import ProfileBussiness from './Pages/ProfileBusiness';
 import ProfileUser from './Pages/ProfileUser';
 import FormalizacionWizard from './Pages/FormalizationWizard';
 import CallDetails from './Pages/CallDetails';
+
 
 const router = createBrowserRouter([
   {
@@ -32,7 +32,9 @@ const router = createBrowserRouter([
       { path: "/profile-business", element: <ProfileBussiness></ProfileBussiness> },
       {path: "/marketplace", element: <Marketplace></Marketplace>},
       {path: "/formalization-wizard", element: <FormalizacionWizard></FormalizacionWizard>},
-      {path: "/call-details", element: <CallDetails></CallDetails>}
+      {path: "/call-details", element: <CallDetails></CallDetails>},
+      {path: "/panel", element: <AdminPanelBusiness> </AdminPanelBusiness>},
+      {path: "/product/:productId", element: <ProductDetailsPage />}
 
     ],
   },

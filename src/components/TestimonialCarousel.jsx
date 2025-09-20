@@ -1,5 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import "swiper/css/autoplay";
+import { Autoplay } from "swiper/modules";
 import panaderia from "../assets/pasteleria.jpg";
 import tienda from "../assets/tienda.jpg";
 import artesanias from "../assets/artesanias.jpg";
@@ -32,7 +34,13 @@ export default function TestimonialCarousel() {
         <h2 className="text-4xl font-bold text-green-800 text-center mb-12">
           Historias de Éxito
         </h2>
-        <Swiper spaceBetween={30} slidesPerView={1} loop={true} autoplay={{ delay: 5000 }}>
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={30}
+          slidesPerView={1}
+          loop={true}
+          autoplay={{ delay: 5000 }}
+        >
           {testimonials.map((t, i) => (
             <SwiperSlide key={i}>
               <div className="bg-white p-10 rounded-3xl shadow-xl max-w-2xl mx-auto text-center">
